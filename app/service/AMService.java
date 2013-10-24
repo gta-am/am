@@ -1,5 +1,6 @@
 package service;
 
+import dto.UserInfoDto;
 import models.InfomationModel;
 
 import java.util.Arrays;
@@ -23,9 +24,9 @@ public interface AMService {
 
     public void createNewsInfoMapping() throws Exception;
 
-    public void doIndex(List<InfomationModel> newsList) throws Exception;
+    public void doIndex(List<UserInfoDto> newsList) throws Exception;
 
-    public List<InfomationModel> searchInfoByName(String name);
+    public List<UserInfoDto> searchInfoByName(String name);
 
     /**
      * 索引字段名描述

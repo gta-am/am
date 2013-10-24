@@ -13,6 +13,8 @@ import java.util.Date;
 
 public class InfomationModel {
 
+    public String number;
+
     public String name;
 
     public String department;

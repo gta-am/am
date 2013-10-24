@@ -1,6 +1,7 @@
 package business;
 
 import com.tom.springutil.StopWatch;
+import dto.UserInfoDto;
 import models.InfomationModel;
 import play.Logger;
 import service.AMService;
@@ -15,9 +16,9 @@ import java.util.List;
  * Time: 上午9:38
  * 功能说明:
  */
-public class createESMappingService {
+public class CreateESMappingService {
 
-    public void createESMapping(List<InfomationModel> list) {
+    public static void createESMapping(List<UserInfoDto> list) {
         try{
             AMService am = new DefaultAMServiceImpl();
             if(ElasticsearchHelper.isIndexExist(am.index_name)){
@@ -35,7 +36,7 @@ public class createESMappingService {
                 sw.stop();
             }
         }catch (Exception e){
-            System.out.println("createESMappingService--> :" + e.getMessage());
+            System.out.println("CreateESMappingService--> :" + e.getMessage());
         }
     }
 }

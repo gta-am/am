@@ -1,5 +1,6 @@
 package service;
 
+import dto.UserInfoDto;
 import models.InfomationModel;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -55,17 +56,17 @@ public class DefaultAMServiceImpl implements AMService {
                 .field("index", "not_analyzed")
                 .endObject()
                 .startObject(InfomationFieldMapping.PUNCHEDDATE)    //打卡日期
-                .field("type", "long")
+                .field("type", "string")
                 .field("store", "yes")
                 .field("index", "not_analyzed")
                 .endObject()
                 .startObject(InfomationFieldMapping.STARTTIME)  //  上班打卡时间
-                .field("type", "long")
+                .field("type", "string")
                 .field("store", "yes")
                 .field("index", "not_analyzed")
                 .endObject()
                 .startObject(InfomationFieldMapping.ENDTIME)   //下班打卡时间
-                .field("type", "long")
+                .field("type", "string")
                 .field("store", "yes")
                 .field("index", "not_analyzed")
                 .endObject()
@@ -86,21 +87,20 @@ public class DefaultAMServiceImpl implements AMService {
      * @throws Exception
      */
     @Override
-    public void doIndex(List<InfomationModel> newsList) throws Exception {
+    public void doIndex(List<UserInfoDto> newsList) throws Exception {
         if (newsList == null || newsList.size() < 1) {
             return ;
         }
-        int index = 0;
         BulkRequestBuilder bulkRequestBuilder = ElasticsearchHelper.getClient().prepareBulk();
-        for (InfomationModel news : newsList) {
+        for (UserInfoDto news : newsList) {
             bulkRequestBuilder.add(ElasticsearchHelper.getClient().prepareIndex(index_name, index_type_news_info)
                     .setSource(jsonBuilder()
                             .startObject()
                             .field(InfomationFieldMapping.NAME, news.name)
                             .field(InfomationFieldMapping.DEPARTMENT, news.department)
-                            .field(InfomationFieldMapping.PUNCHEDDATE, Long.parseLong(DateFormatUtils.format(news.punchedDate, "yyyyMMdd")))
-                            .field(InfomationFieldMapping.STARTTIME, Long.parseLong(DateFormatUtils.format(news.startTime, "HHmm")))
-                            .field(InfomationFieldMapping.ENDTIME, Long.parseLong(DateFormatUtils.format(news.endTime, "HHmm")))
+                            .field(InfomationFieldMapping.PUNCHEDDATE, news.punchedDate)
+                            .field(InfomationFieldMapping.STARTTIME,news.startTime)
+                            .field(InfomationFieldMapping.ENDTIME,news.endTime)
                             .field(InfomationFieldMapping.STATUS, news.status)
                             .endObject()
                     ));
@@ -118,13 +118,13 @@ public class DefaultAMServiceImpl implements AMService {
      * @return
      */
     @Override
-    public List<InfomationModel> searchInfoByName(String name) {
+    public List<UserInfoDto> searchInfoByName(String name) {
         AndFilterBuilder newsFileFilterBuilder = FilterBuilders.andFilter().cache(false);
         //按更新时间倒序排
         SortBuilder sortBuilder = SortBuilders.fieldSort(InfomationFieldMapping.PUNCHEDDATE).order(SortOrder.DESC);
         newsFileFilterBuilder.add(FilterBuilders.inFilter(InfomationFieldMapping.NAME,name));
         SearchResponse searchResponse =  ElasticsearchHelper.doSearchByFilterWithSort(index_name, newsFileFilterBuilder, sortBuilder, index_type_news_info);
-        List<InfomationModel> list =  ElasticsearchHelper.parseHits2List(searchResponse.hits(), InfomationModel.class);
+        List<UserInfoDto> list =  ElasticsearchHelper.parseHits2List(searchResponse.hits(), UserInfoDto.class);
         return list;
     }
 }

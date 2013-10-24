@@ -37,6 +37,12 @@ public abstract class CommonUtils {
      */
     public static final String[] FINANCE_REPORT_DATE_ARR = {"03-31", "06-30", "09-30", "12-31"};
 
+    public static final long AMTIME = getParseDate("08:45");  //GTA上班时间
+    public static final long PMTIME = getParseDate("18:00");  //GTA下班时间
+    public static final long MIDDLETIME = getParseDate("12:00"); //午休时间
+    public static final long SIXHOUR = 8*3600*1000;
+
+
     public static Gson createGson(){
         return new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
     }
@@ -400,20 +406,20 @@ public abstract class CommonUtils {
         }
         return "";
     }
-
-     public static final long AMTIME = getParseDate("08:45");  //GTA上班时间
-     public static final long PMTIME = getParseDate("18:00");  //GTA下班时间
-     public static final long MIDDLETIME = getParseDate("12:00"); //午休时间
-     public static final long SIXHOUR = 8*3600*1000;
-
-
-    //状态（-1.未知状态、0.正常、1.缺少上班打卡记录、2.缺少下班打卡记录、3.迟到、4.早退、5.旷工一天,6.下午没打卡且迟到,7.上午没打卡且早退,8迟到且早退）
+    /**
+     * 根据excel得到的时间，判断打卡者状态。
+     *
+     * 状态（-1.未知状态、0.正常、1.缺少上班打卡记录、2.缺少下班打卡记录、3.迟到、4.早退、5.旷工一天、
+     *       6.下午没打卡且迟到,7.上午没打卡且早退,8迟到且早退）
+     * @param punchCardTime
+     * @return
+     */
     public static int getStatus(String punchCardTime){
         long punchTime = 0;          //打卡时间
         int status = -1;            //状态
-        String[] times = punchCardTime.split(" ");
+        String[] times = punchCardTime.trim().split(" ");
 
-        if(times==null || times.length==0){ //没有打卡记录
+        if(times==null || times.length==0 || "".equals(times[0].trim())){ //没有打卡记录
             status = 5;
 
         }else if(times.length==1){  //有一条打卡记录
@@ -442,7 +448,6 @@ public abstract class CommonUtils {
                 }
             }
         }
-
         if(punchTime > 0 && punchTime <= AMTIME){
            status = 2;
         }else if(punchTime >= PMTIME){
@@ -461,6 +466,7 @@ public abstract class CommonUtils {
            return sdf.parse(time).getTime();
         } catch (ParseException e) {
             Logger.info("不正确的日期格式");
+            e.printStackTrace();
             return 0;
         }
     }

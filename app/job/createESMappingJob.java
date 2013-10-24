@@ -17,6 +17,6 @@ import java.util.concurrent.CountDownLatch;
  * 功能说明:
  */
 @OnApplicationStart(async = true)
-public class createESMappingJob extends Job{
+public class CreateESMappingJob extends Job{
 
 }

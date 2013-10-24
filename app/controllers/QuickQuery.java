@@ -1,5 +1,7 @@
 package controllers;
 
+import business.UpLoadExcelService;
+import dto.UserInfoDto;
 import models.InfomationModel;
 import play.mvc.Controller;
 import service.AMService;
@@ -17,11 +19,11 @@ public class QuickQuery extends Controller{
 
     public static void query(String name){
         AMService am = new DefaultAMServiceImpl();
-        List<InfomationModel> list = am.searchInfoByName(name);
+        List<UserInfoDto> list = am.searchInfoByName(name);
         render(list);
     }
 
-    public static void upLoadFile(){
 
-    }
+
+
 }
