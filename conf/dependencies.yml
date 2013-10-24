@@ -1,0 +1,4 @@
+# Application dependencies
+
+require:
+    - play -> excel 1.2.3
