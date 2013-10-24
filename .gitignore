@@ -8,6 +8,13 @@
 out/
 
 #################
+## playframework
+#################
+/modules
+/precompiled
+/tmp
+
+#################
 ## svn
 #################
 .svn/
