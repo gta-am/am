@@ -120,6 +120,8 @@ public class UpLoadExcelService {
      */
     private static UserInfoDto showTime(String times, UserInfoDto userInfoDto) {
         String[] time = times.split(" ");
+        StringBuilder startTime = new StringBuilder();
+        StringBuilder endTime = new StringBuilder();
         if (time == null || time.length == 0 || "".equals(time[0].trim())) {
             userInfoDto.startTime = null;
             userInfoDto.endTime = null;
@@ -127,10 +129,16 @@ public class UpLoadExcelService {
             for (String t : time) {
                 long parseTime = CommonUtils.getParseDate(t);
                 if (parseTime < CommonUtils.MIDDLETIME) {
-                    userInfoDto.startTime = t;
+                    startTime.append(t+",");
                 } else {
-                    userInfoDto.endTime = t;
+                    endTime.append(t+",");
                 }
+            }
+            if(startTime.length()>0){
+                userInfoDto.startTime = startTime.substring(0, startTime.lastIndexOf(","));
+            }
+            if(endTime.length()>0){
+                userInfoDto.endTime = endTime.substring(0,endTime.lastIndexOf(","));
             }
         }
         return userInfoDto;

@@ -14,25 +14,52 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * desc: 从excel解析用户信息
+ * desc: 考勤Excell解析器
  * User: weiguili(li5220008@gmail.com)
  * Date: 13-10-23
  * Time: 下午3:29
  */
-public class ParseUserFromExcel {
-    static String EXCELLFile = "xx.xls";
-    private static final String MIDDLETIME = "12:00";
-    //public static final long AMTIME = getParseDate("08:45");  //GTA上班时间
-    //public static final long PMTIME = getParseDate("18:00");  //GTA下班时间
-    //public static final long MIDDLETIME = getParseDate("12:00"); //午休时间
-    private ParseUserFromExcel parseUserFromExcel = null;//单例模式
-    private ParseUserFromExcel() {
+public class AttendanceExcelParser {
+
+    private final long AMTIME = getParseLong("08:45");  //GTA上班时间
+    private final long PMTIME = getParseLong("18:00");  //GTA下班时间
+    private final long MIDDLETIME = getParseLong("12:00"); //午休时间
+
+    //要解析的excel文件
+    private File excelFile;
+    private List<InfomationModel> infomationModelList; //返回的解析实体
+
+    private static AttendanceExcelParser instance = null;
+    private AttendanceExcelParser(File excelFile){ //单例模式
+        setExcelFile(excelFile);
+    }
+    public static List<InfomationModel> getParser(File excelFile) throws Exception{
+        if(instance == null){
+            instance = new AttendanceExcelParser(excelFile);
+        }
+        instance.parse();
+        return instance.getInfomationModelList();
     }
 
-    public static List<InfomationModel> parse(File excelFile) throws Exception {
-        String fileName = excelFile.getName();
-        InputStream is = new FileInputStream(excelFile);
-        InfomationModel infomationModel = null;
+    public File getExcelFile() {
+        return excelFile;
+    }
+
+    public void setExcelFile(File excelFile) {
+        this.excelFile = excelFile;
+    }
+
+    public List<InfomationModel> getInfomationModelList() {
+        return infomationModelList;
+    }
+    /**
+     * 主解析方法入口
+     * @return
+     * @throws Exception
+     */
+    public void parse() throws Exception {
+        String fileName = getExcelFile().getName();
+        InputStream is = new FileInputStream(getExcelFile());
         if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx")){
             Workbook wb = WorkbookFactory.create(is);
             for(int sheetNum=0; sheetNum<wb.getNumberOfSheets(); sheetNum++){//循环工作簿
@@ -50,7 +77,7 @@ public class ParseUserFromExcel {
                     if (row == null) {
                         continue;
                     }
-                    infomationModel = new InfomationModel();
+                    InfomationModel infomationModel = new InfomationModel();
                     // 循环列Cell
                     // 0考勤号码 1姓名 2部门 3日期 4时间
                     Cell cell = row.getCell(0);
@@ -60,16 +87,60 @@ public class ParseUserFromExcel {
                     Cell cell2 = row.getCell(2);
                     infomationModel.department = getStringValue(cell);
                     Cell cell3 = row.getCell(3);
-                    infomationModel.punchedDate = getDate(getStringValue(cell3), "yy-MM-dd");
+                    infomationModel.punchedDate = getDate(getStringValue(cell3));
 
                     Cell cell4 = row.getCell(4);
-                    infomationModel.number = getStringValue(cell);
+                    String startTime = getAmPmTimeFromPunchTime(getStringValue(cell4))._1;
+                    String endTime = getAmPmTimeFromPunchTime(getStringValue(cell4))._2;
+                    infomationModel.startTime = getDate(startTime);
+                    infomationModel.endTime = getDate(endTime);
+                    infomationModel.status = getStatus(startTime,endTime);
+                    infomationModelList.add(infomationModel);//插入
                 }
             }
         }else {
+            Logger.info("格式解析错误。");
             throw new Exception("格式解析错误。");//暂时还没做容错处理。
         }
-        return null;
+    }
+
+    /**
+     * 根据上午打卡时间和下午打卡时间判断考勤状态
+     * @param pmTimes
+     * @param amTimes
+     * @return
+     */
+    public int getStatus(String pmTimes,String amTimes) {
+        Long amTime = getParseLong(amTimes);
+        Long pmTime = getParseLong(pmTimes);
+        int status = -1;
+        //穷举法判断所有情况
+        if(StringUtils.isNotBlank(amTimes) && StringUtils.isNotBlank(pmTimes)){
+            if(amTime<=AMTIME && pmTime>=PMTIME){
+                status = 0;
+            }else if(amTime>AMTIME && pmTime>=PMTIME){
+                status = 3;
+            }else if(amTime>AMTIME && pmTime<PMTIME){
+                status =8;
+            }else if(amTime<=AMTIME && pmTime<PMTIME){
+                status =4;
+            }
+        }else if(StringUtils.isBlank(amTimes) && StringUtils.isNotBlank(pmTimes)){
+            if(pmTime>=PMTIME){
+                status = 1;
+            }else{
+                status = 7;
+            }
+        }else if(StringUtils.isBlank(amTimes) && StringUtils.isBlank(pmTimes)){
+            status = 5;
+        }else if(StringUtils.isNotBlank(amTimes) && StringUtils.isBlank(pmTimes)){
+            if(amTime<=AMTIME){
+                status = 2;
+            }else{
+                status = 6;
+            }
+        }
+        return status;
     }
 
     /**
@@ -77,7 +148,7 @@ public class ParseUserFromExcel {
      * @param punchTime
      * @return
      */
-    private F.T2<String,String> getAmPmTimeFromPunchTime(String punchTime){
+    public F.T2<String,String> getAmPmTimeFromPunchTime(String punchTime){
         String amTime = "";
         String pmTime = "";
         if(StringUtils.isNotBlank(punchTime)){
@@ -100,13 +171,15 @@ public class ParseUserFromExcel {
         return F.T2(amTime,pmTime);
     }
 
+
+
     /**
      * 判断一个时间是否是上午时间
      * @param timeStr
      * @return
      */
-    private static boolean isAmTime(String timeStr){
-        if(getParseDate(timeStr,"HH:mm")<=getParseDate(MIDDLETIME,"HH:mm")){
+    public boolean isAmTime(String timeStr){
+        if(getParseLong(timeStr)<= MIDDLETIME){
             return true;
         }else {
             return false;
@@ -125,7 +198,7 @@ public class ParseUserFromExcel {
     }
 
     //表头校验
-    private static boolean validateSheetHead(Row row){
+    public boolean validateSheetHead(Row row){
         if(row == null ){
             return false;
         }
@@ -148,7 +221,7 @@ public class ParseUserFromExcel {
         return true;
     }
 
-    private static String getStringValue(Cell xssfCell){
+    public String getStringValue(Cell xssfCell){
         if(xssfCell.getCellType() == xssfCell.CELL_TYPE_BOOLEAN){
             return String.valueOf( xssfCell.getBooleanCellValue());
         }else if(xssfCell.getCellType() == xssfCell.CELL_TYPE_NUMERIC){
@@ -164,7 +237,7 @@ public class ParseUserFromExcel {
      * @param fomat 时间格式
      * @return
      */
-    public static Long getParseDate(String time, String fomat) {
+    public Long getParseLong(String time, String fomat) {
         SimpleDateFormat sdf = new SimpleDateFormat(fomat);
         try {
             return sdf.parse(time).getTime();
@@ -174,8 +247,17 @@ public class ParseUserFromExcel {
         }
     }
 
-    public static Date getDate(String time, String fomat) {
-        SimpleDateFormat sdf = new SimpleDateFormat(fomat);
+    /**
+     * 固定格式 HH:mm
+     * @param time
+     * @return
+     */
+    public  Long getParseLong(String time) {
+        return getParseLong(time,"HH:mm");
+    }
+
+    public Date getDate(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
         try {
             return sdf.parse(time);
         } catch (ParseException e) {

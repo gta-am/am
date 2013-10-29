@@ -10,6 +10,8 @@ import play.libs.IO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -47,11 +49,13 @@ public class ParseUserFromExcelUtils {
 
 
 
-    public static String getStringValue(Cell xssfCell){
+    public static String getStringValue(Cell xssfCell) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         if(xssfCell.getCellType() == xssfCell.CELL_TYPE_BOOLEAN){
             return String.valueOf( xssfCell.getBooleanCellValue());
         }else if(xssfCell.getCellType() == xssfCell.CELL_TYPE_NUMERIC){
-            return String.valueOf( (int)(xssfCell.getNumericCellValue()));
+            return sdf.format(xssfCell.getDateCellValue());
+            //return String.valueOf( (int)(xssfCell.getNumericCellValue()));
         }else{
             return String.valueOf( xssfCell.getStringCellValue());
         }

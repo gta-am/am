@@ -34,9 +34,11 @@ public class CreateESMappingService {
                 sw.start("开始索引");
                 am.doIndex(list);
                 sw.stop();
+                ElasticsearchHelper.close();
             }
         }catch (Exception e){
             System.out.println("CreateESMappingService--> :" + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

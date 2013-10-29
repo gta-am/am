@@ -14,8 +14,8 @@ import java.util.List;
  */
 public interface AMService {
     public final static  List<String> actions = Arrays.asList("delete", "update", "insert");
-    public static final String index_name = "GREATAM_DATA_TEST";
-    public static final String index_type_news_info = "AM_INFO_TEST";
+    public static final String index_name = "am_data_test";
+    public static final String index_type_news_info = "am_info_test";
 
     /**
      * 创建索引库,相当于创建数据库
@@ -43,18 +43,18 @@ public interface AMService {
         /**
          * 打卡日期
          */
-        public static final String PUNCHEDDATE   = "punchedDate ";
+        public static final String PUNCHEDDATE   = "punchedDate";
         /**
          * 上班打卡时间
          */
-        public static final String STARTTIME  = "startTime ";
+        public static final String STARTTIME  = "startTime";
         /**
          * 下班打卡时间
          */
-        public static final String ENDTIME  = "endTime ";
+        public static final String ENDTIME  = "endTime";
         /**
          * 状态（-1.未知状态、0.正常、1.缺少上班打卡记录、2.缺少下班打卡记录、3.迟到、4.早退、5.旷工一天,6.下午没打卡且迟到,7.上午没打卡且早退,8迟到且早退）
          */
-        public static final String STATUS  = "status ";
+        public static final String STATUS  = "status";
     }
 }
