@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>上传考勤表（xls文件）</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/public/dist/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/public/stylesheets/main.css" rel="stylesheet" media="screen">
+    <link href="@{'/public/stylesheets/ajaxfileupload.css'}" type="text/css" rel="stylesheet">
+    <script src="/public/dist/js/jquery-1.8.2.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/javascripts/ajaxfileupload.js"></script>
+</head>
+<body>
+<div id="page-container">
+
+    <input type="file" id="uploadFile" name="file" style="margin-top: 100px;margin-left: 100px;"/>
+   *{ <input id="fileInput2" class="input-file uniform_on" type="file" name="file" size="19" style="opacity: 0;">}*
+    <br/>
+    <input type="button" value="生成ES索引" onclick="return ajaxFileUpload();" style="margin-left: 100px;">
+</div>
+<br/>
+<br/>
+<br/>
+   <div style="margin-right: 480px" id="showSuccess"></div>
+<script>
+
+    function ajaxFileUpload() {
+        var url = #{jsRoute @DoParseExcel.uploadFile()/};
+        $.ajaxFileUpload(
+                {
+                    url:url.url(),
+                    secureuri:false,
+                    fileElementId:'uploadFile',
+                    dataType:'json',
+                    success:function (data) {
+                       $("#showSuccess").innerHTML("<h1 >索引创建完成，可以开始搜索了!</h1>")
+                    },
+                    error:function (data, status, e)//服务器响应失败处理函数
+                    {
+                        $("#showSuccess").innerHTML("<h1 >创建索引失败，重试下!</h1>")
+                    }
+                }
+        )
+        return false;
+    }
+
+
+
+</script>
+
+</body>
+</html>

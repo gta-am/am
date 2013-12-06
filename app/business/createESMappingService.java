@@ -2,7 +2,6 @@ package business;
 
 import com.tom.springutil.StopWatch;
 import dto.UserInfoDto;
-import models.InfomationModel;
 import play.Logger;
 import service.AMService;
 import service.DefaultAMServiceImpl;
@@ -18,8 +17,7 @@ import java.util.List;
  */
 public class CreateESMappingService {
 
-    public static void createESMapping(List<UserInfoDto> list) {
-        try{
+    public static void createESMapping(List<UserInfoDto> list) throws Exception{
             AMService am = new DefaultAMServiceImpl();
             if(ElasticsearchHelper.isIndexExist(am.index_name)){
                 Logger.info("索引已存在，不创建，任务退出");
@@ -34,11 +32,7 @@ public class CreateESMappingService {
                 sw.start("开始索引");
                 am.doIndex(list);
                 sw.stop();
-                ElasticsearchHelper.close();
+                //ElasticsearchHelper.close();
             }
-        }catch (Exception e){
-            System.out.println("CreateESMappingService--> :" + e.getMessage());
-            e.printStackTrace();
-        }
     }
 }

@@ -1,74 +1,193 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>Bootstrap 101 Template</title>
+    <title>gta—11月考勤查询</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="/public/dist/css/bootstrap.css" rel="stylesheet" media="screen">
     <link href="/public/stylesheets/main.css" rel="stylesheet" media="screen">
-
+    <link href="/public/stylesheets/jquery.ui.all.css" rel="stylesheet" media="screen">
+    <link href="/public/stylesheets/ui-lightness/jquery-ui-1.9.1.custom.css" rel="stylesheet" media="screen">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/public/dist/js/jquery-1.8.2.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/javascripts/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/javascripts/jquery-ui-1.9.1.custom.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/javascripts/manage_global-qic.js" type="text/javascript" charset="utf-8"></script>
+    <script src="@{'/public/javascripts/highChart/js/highcharts.js'}" type="text/javascript" charset="utf-8"></script>
+    <script src="@{'/public/javascripts/highChart/js/highchartstheme.js'}" type="text/javascript" charset="utf-8"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/public/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
+<style>
+    .ui-autocomplete {
+        max-height: 100px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+    }
+
+        /* IE 6 doesn't support max-height
+        * we use height instead, but this forces the menu to always be this tall
+        */
+    * html .ui-autocomplete {
+        height: 100px;
+    }
+
+</style>
+
+<script>
+    var url = #{jsRoute @Application.showName()/};
+    var drawChart = #{jsRoute @Application.drawChart() /}
+    $(function () {
+        var cache = {};   //结果集缓存
+        var inputValues;    //用户输入缓存
+        $("#tags").autocomplete({
+            minLength:1,
+            source:function (request, response) {
+                var term = request.term;
+                if (term == inputValues) {
+                    response(cache)
+                    return;
+                }
+                $.ajax({
+                    url:url.url(),
+                    dataType:"json",
+                    data:{
+                        pinyin:request.term
+                    },
+                    success:function (data) {
+                        inputValues = request.term;
+                        cache = data;
+                        response(data)
+                    }
+                });
+            },
+            select:function (event, ui) {
+                $("#tags").val(ui.item.value);
+                $("#search").submit();
+            },
+            open:function () {
+                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close:function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+        });
+
+        var name = $("#tags").val();
+        $("#drawChart").click(function () {
+
+            $.get(drawChart.url(),
+                    {"name":name},
+                    function (data) {
+                        $(".attendanceChart").html(data);
+                        $(".attendanceChart").dialog("open");
+            });
+        });
+
+        $(".attendanceChart").dialog({
+            autoOpen:false,
+            modal:true,
+            resizable:false,
+            width:830,
+            height:470
+        })
+    });
+
+</script>
 <body>
 
 <div id="page-container">
-    <div id="main-nav"><h1>AM 考勤查询</h1></div>
     <div id="header">
-        <form class="form-inline" role="form">
+        <form class="form-inline" role="form" action="@{Application.index()}" id="search">
             <div class="col-lg-7" id="searchText">
                 <div class="input-group">
-                    <input type="text" class="form-control">
+                    <input type="hidden" id="flag" name="flag" value="">
+                    <input type="text" id="tags" class="form-control" name="name" value="${name}" placeholder="请输入姓名/拼音/首字母">
                       <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">Go!</button>
+                        <button class="btn btn-primary" type="submit">Go!</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <button type="button" class="btn btn-info" id="drawChart">Info</button>
                       </span>
                 </div>
             </div>
 
         </form>
     </div>
-
+    <div style="font-size: 14px">
+        <br>
+        <br>
+        打卡异常次数: ${eventDto.exceptionTimes}次
+        <br>
+        上班迟到累计时间: ${eventDto.defectiveTime}分钟(注：不包含缺省统计)
+        <br>
+        加班天数: ${eventDto.extraWorkDay}天
+    </div>
     <div id="content">
         <table class="table table-bordered" style="text-align: center">
             <thead>
             <tr>
                 <th style="text-align: center">姓名</th>
-                <th style="text-align: center">部门</th>
-                <th style="text-align: center">日期</th>
+                <th style="text-align: center" onclick="doSort('2')"><a title="点击排序" style="cursor: pointer">部门</a></th>
+                <th style="text-align: center" onclick="doSort('1')"><a title="点击排序" style="cursor: pointer">日期</a></th>
                 <th style="text-align: center">上班打卡时间</th>
                 <th style="text-align: center">下班打卡时间</th>
-                <th style="text-align: center">备注</th>
-
+                <th style="text-align: center" onclick="doSort('3')"><a title="点击排序" style="cursor: pointer">状态</a></th>
+                *{<th style="text-align: center" >迟到次数</th>
+                <th style="text-align: center" >迟到总时间(minutes)</th>}*
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>张三</td>
-                <td>机构应用技术部</td>
-                <td>2013-9-10</td>
-                <td class="danger">8:48</td>
-                <td class="success">18:10</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>李四</td>
-                <td>机构核心技术部</td>
-                <td>2013-9-11</td>
-                <td class="success">8:40</td>
-                <td class="success">18:15</td>
-                <td></td>
-            </tr>
+            #{list items:list ,as :'item'}
+                #{if item.status != 0 && item.status != -1 && item.status !=-3}
+                <tr class="danger">
+                    <td>${item.name}</td>
+                    <td>${item.department}</td>
+                    <td>${item.punchedDate}(${item.weeks})</td>
+                    <td>${item.showStatus(item).startTime}</td>
+                    <td>${item.showStatus(item).endTime}</td>
+                    <td>${item.showStatus(item).result}</td>
+                   *{ <td>${lateNum}</td>
+                    <td>${lateMinutes}</td>}*
+                </tr>
+                #{/if}
+                #{elseif item.status ==-1 || item.status == -3}
+                <tr class="active">
+                    <td>${item.name}</td>
+                    <td>${item.department}</td>
+                    <td>${item.punchedDate}(${item.weeks})</td>
+                    <td>${item.showStatus(item).startTime}</td>
+                    <td>${item.showStatus(item).endTime}</td>
+                    <td>${item.showStatus(item).result}</td>
+                    *{<td>${lateNum}</td>
+                    <td>${lateMinutes}</td>}*
+                </tr>
+                #{/elseif}
+                #{else }
+                <tr class="success">
+                    <td>${item.name}</td>
+                    <td>${item.department}</td>
+                    <td>${item.punchedDate}(${item.weeks})</td>
+                    <td>${item.showStatus(item).startTime}</td>
+                    <td>${item.showStatus(item).endTime}</td>
+                    <td>${item.showStatus(item).result}</td>
+                    *{<td>${lateNum}</td>
+                    <td>${lateMinutes}</td>}*
+                </tr>
+                #{/else}
+            #{/list}
             </tbody>
 
         </table>
     </div>
-
+    <div class="attendanceChart" title="打卡时间走势图"></div>
 </div>
+<script>
+    function doSort(num) {
+        $("#flag").val(num);
+        $("#search").submit();
+    }
 
-
+</script>
 </body>
 </html>
 

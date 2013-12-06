@@ -3,6 +3,7 @@ package utils;
 import com.google.gson.Gson;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
+import org.elasticsearch.action.admin.indices.mapping.delete.DeleteMappingRequest;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -12,6 +13,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.Requests;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.ImmutableSettings.Builder;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -43,9 +45,10 @@ public class ElasticsearchHelper {
         client = new TransportClient().addTransportAddress(
                 new InetSocketTransportAddress(Play.configuration.getProperty("elasticsearch.server", "localhost"),
                         Integer.valueOf(Play.configuration.getProperty("elasticsearch.port", "9300"))));
-        client.connectedNodes();
+        //client.connectedNodes();
 
     }
+
 
     /**
      * 注:带高亮处理
@@ -131,6 +134,7 @@ public class ElasticsearchHelper {
         SearchResponse searchResponse = client.prepareSearch(index)
                 .setFilter(filterBuilder)
                 .setTypes(types)
+                .setSize(100)
                 .addSort(sortBuilder)
                 .setExplain(true)
                 .execute()
@@ -147,6 +151,7 @@ public class ElasticsearchHelper {
             return response;
         } catch (Exception e) {
             Logger.error("建立mapping出错");
+            e.printStackTrace();
         }
         return null;
     }
@@ -166,11 +171,17 @@ public class ElasticsearchHelper {
        // client.deleteByQuery()
         return response;
     }
+    public static void deleteByQuery(String index,String type){
+        client.admin().indices().prepareDelete(index,type).execute().actionGet();
+    }
     public static boolean isIndexExist(String indexName){
         return client.admin().indices().exists( new IndicesExistsRequest(indexName)).actionGet().exists();
     }
     public static CreateIndexResponse createIndex( String indexName) {
         return client.admin().indices().prepareCreate(indexName).execute().actionGet();
+    }
+    public static CreateIndexResponse createIndex( String indexName,Builder settings) {
+        return client.admin().indices().prepareCreate(indexName).setSettings(settings).execute().actionGet();
     }
 
     public static Client getClient() {

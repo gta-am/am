@@ -1,7 +1,7 @@
 package service;
 
 import dto.UserInfoDto;
-import models.InfomationModel;
+import play.libs.F;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +13,6 @@ import java.util.List;
  * 功能描述:
  */
 public interface AMService {
-    public final static  List<String> actions = Arrays.asList("delete", "update", "insert");
     public static final String index_name = "am_data_test";
     public static final String index_type_news_info = "am_info_test";
 
@@ -28,6 +27,14 @@ public interface AMService {
 
     public List<UserInfoDto> searchInfoByName(String name);
 
+    public List<UserInfoDto> searchInfoByPinyin(String pinyin);
+
+    public List<UserInfoDto> searchInfoByQP(String qp);
+
+    public F.T2<Integer, Integer> getLateNumAndTime(List<UserInfoDto> list);
+
+    public void del();
+
     /**
      * 索引字段名描述
      */
@@ -36,6 +43,8 @@ public interface AMService {
          * 打卡人姓名
          */
         public static final String NAME = "name";
+        public static final String PRIMITIVENAME = "name.primitive";
+        public static final String QPNAME = "name.qp";
         /**
          * 打卡人部门
          */
