@@ -1,15 +1,5 @@
 //策略对比JS
 $(function () {
-    $.qicLoading({
-        target:'body',
-        text:"努力加载中...",
-        modal:false,
-        width:220,
-        top:'35%',
-        left:'40%',
-        postion:"absolute",
-        zIndex:2000
-    });
     $('#container').highcharts({
         chart:{
             type:'line',
@@ -17,15 +7,14 @@ $(function () {
             height:200
         },
         title:{
-            text:'上班时间走势',
+            text:'上班打卡时间走势',
             x:-20 //center
         },
         xAxis:{
             type:'datetime',
-            min:Date.UTC(2013, 10, 01),
-            max:Date.UTC(2013, 10, 31),
-            //ckInterval:1000*60*60
-            // showFirstLabel: false,
+            min:_start,
+            max:_end,
+            tickInterval:interval,
             labels:{
                 //align: 'left',
                 formatter:function () {
@@ -35,12 +24,13 @@ $(function () {
 
         },
         yAxis:{
-            /*min:Date.UTC(2013, 8, 1, 08, 8, 0), //0表示1月 以此类推
-             max:Date.UTC(2013, 8, 1, 09, 20, 0),*/
-            //ckInterval:1000*60*60
-            // showFirstLabel: false,
+            min: Date.UTC(0, 0, 0, 08, 05, 0),
+            max: Date.UTC(0, 0, 0, 10, 0, 0),
+            tickInterval:1000*60*15,
+            title: {
+                enabled: false
+            },
             labels:{
-                //align: 'left',
                 formatter:function () {
                     return Highcharts.dateFormat('%H:%M', this.value);
                 }
@@ -48,7 +38,7 @@ $(function () {
             plotLines: [{
                 color: '#FF0000',
                 width: 2,
-                value: Date.UTC(2013, 10, 1, 08, 45, 0)
+                value: Date.UTC(0, 0, 0, 08, 45, 0)
             }]
         },
         tooltip:{
@@ -93,13 +83,14 @@ $(function () {
             height:200
         },
         title:{
-            text:'下班时间走势',
+            text:'下班打卡时间走势',
             x:-20 //center
         },
         xAxis:{
             type:'datetime',
-            min:Date.UTC(2013, 10, 01),
-            max:Date.UTC(2013, 10, 31),
+            min:_start,
+            max:_end,
+            tickInterval:interval,
             //ckInterval:1000*60*60
             // showFirstLabel: false,
             labels:{
@@ -111,12 +102,13 @@ $(function () {
 
         },
         yAxis:{
-            /*min:Date.UTC(2013, 8, 1, 08, 8, 0), //0表示1月 以此类推
-             max:Date.UTC(2013, 8, 1, 09, 20, 0),*/
-            //ckInterval:1000*60*60
-            // showFirstLabel: false,
+            min: Date.UTC(0, 0, 0, 17, 30, 0),
+            max: Date.UTC(0, 0, 0, 20, 40, 0),
+            tickInterval:1000*60*20,
+            title: {
+                enabled: false
+            },
             labels:{
-                //align: 'left',
                 formatter:function () {
                     return Highcharts.dateFormat('%H:%M', this.value);
                 }
@@ -124,7 +116,7 @@ $(function () {
             plotLines: [{
                 color: '#FF0000',
                 width: 2,
-                value: Date.UTC(2013, 10, 1, 18, 0, 0)
+                value: Date.UTC(0, 0, 0, 18, 0, 0)
             }]
         },
         tooltip:{
@@ -162,5 +154,4 @@ $(function () {
             }
         ]
     });
-    $.qicLoading({remove:true});//移除loading。。。
 });

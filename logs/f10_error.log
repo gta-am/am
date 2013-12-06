@@ -1,0 +1,532 @@
+play-thread-1-ERROR-[2013-12-06 13:34:07,305]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6e
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:18,320]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6f
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:19,054]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6g
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:19,617]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6h
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:19,929]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6i
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:20,445]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6j
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:20,710]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6k
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:21,210]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6l
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:21,445]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6m
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:21,757]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6n
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:22,085]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6o
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:22,382]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e6p
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:23,179]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e70
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:23,460]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e71
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:34:24,772]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e72
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:37:11,918]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e73
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:37:13,590]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e74
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:37:14,433]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e75
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more
+play-thread-1-ERROR-[2013-12-06 13:37:14,715]-play.Logger.niceThrowable(Logger.java:571)-
+
+@6gfh23e76
+Internal Server Error (500) for request GET /application/showdetail?name=%E9%AD%8F%E8%B4%B5%E7%A4%BC
+
+Execution exception (In /app/utils/ElasticsearchHelper.java around line 151)
+NoNodeAvailableException occured : No node available
+
+play.exceptions.JavaExecutionException: No node available
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:237)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.elasticsearch.client.transport.NoNodeAvailableException: No node available
+	at org.elasticsearch.client.transport.TransportClientNodesService.execute(TransportClientNodesService.java:202)
+	at org.elasticsearch.client.transport.support.InternalTransportClient.execute(InternalTransportClient.java:106)
+	at org.elasticsearch.client.support.AbstractClient.search(AbstractClient.java:210)
+	at org.elasticsearch.client.transport.TransportClient.search(TransportClient.java:388)
+	at org.elasticsearch.action.search.SearchRequestBuilder.doExecute(SearchRequestBuilder.java:816)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:62)
+	at org.elasticsearch.action.ActionRequestBuilder.execute(ActionRequestBuilder.java:57)
+	at utils.ElasticsearchHelper.doSearchByFilterWithoutSort(ElasticsearchHelper.java:151)
+	at service.DefaultAMServiceImpl.searchInfoByNameAndMonth(DefaultAMServiceImpl.java:259)
+	at controllers.Application.showDetail(Application.java:178)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	... 1 more

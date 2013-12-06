@@ -16,9 +16,9 @@ import java.util.List;
  * 功能说明:
  */
 public class CreateESMappingService {
-
+   private static AMService am = new DefaultAMServiceImpl();
     public static void createESMapping(List<UserInfoDto> list) throws Exception{
-            AMService am = new DefaultAMServiceImpl();
+
             if(ElasticsearchHelper.isIndexExist(am.index_name)){
                 Logger.info("索引已存在，不创建，任务退出");
             }else{
@@ -34,5 +34,12 @@ public class CreateESMappingService {
                 sw.stop();
                 //ElasticsearchHelper.close();
             }
+    }
+
+    public static void addIndex(List<UserInfoDto> list) throws Exception{
+        StopWatch sw = new StopWatch("索引数据");
+        sw.start("开始索引");
+        am.doIndex(list);
+        sw.stop();
     }
 }

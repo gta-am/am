@@ -23,4 +23,10 @@ public class ParseUserFromExcelUtils {
             return String.valueOf( xssfCell.getStringCellValue());
         }
     }
+
+    public static String getDateValue(Cell xssfCell) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            return sdf.format(xssfCell.getDateCellValue());
+    }
+
 }

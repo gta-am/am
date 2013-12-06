@@ -13,7 +13,8 @@
     <script src="/public/javascripts/jquery-ui-1.9.1.custom.js" type="text/javascript" charset="utf-8"></script>
     <script src="/public/javascripts/manage_global-qic.js" type="text/javascript" charset="utf-8"></script>
     <script src="@{'/public/javascripts/highChart/js/highcharts.js'}" type="text/javascript" charset="utf-8"></script>
-    <script src="@{'/public/javascripts/highChart/js/highchartstheme.js'}" type="text/javascript" charset="utf-8"></script>
+    <script src="@{'/public/javascripts/highChart/js/highchartstheme.js'}" type="text/javascript"
+            charset="utf-8"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/public/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 
@@ -36,8 +37,129 @@
 </style>
 
 <script>
-    var url = #{jsRoute @Application.showName()/};
-    var drawChart = #{jsRoute @Application.drawChart() /}
+
+</script>
+<body>
+
+<div id="page-container">
+    <div id="header">
+            <div class="col-lg-7" id="searchText">
+                <div class="input-group">
+                    <input type="hidden" id="flag" name="flag" value="">
+                    <input type="text" id="tags" class="form-control" name="name" value="${name}"
+                           placeholder="请输入姓名/拼音/首字母">
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" style="margin-right: 20px" id="submit_data">Go!</button>
+                          <button type="button" class="btn btn-info" id="drawChart">点我@_@</button>
+                      </span>
+                </div>
+            </div>
+    </div>
+    <div>
+       <div style="font-size: 15px">
+           <span style="color:#468847 ">请</span> <span style="color:#F89406 ">选</span> <span style="color:#B94A48 ">择</span><span style="color:#3A87AD ">月</span><span style="color:#333333">份</span>:
+       </div>
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <button class="btn btn-success"  value="13" param_depressed="true">最近三个月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="12" param_depressed="true" disabled="disabled">12月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="11" param_depressed="true">11月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="10" param_depressed="true">10月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="9" param_depressed="true">9月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="8" param_depressed="true">8月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="7" param_depressed="true">7月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="6" param_depressed="true" disabled="disabled">6月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="5" param_depressed="true" disabled="disabled">5月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success"  value="4" param_depressed="true" disabled="disabled">4月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="3" param_depressed="true" disabled="disabled">3月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="2" param_depressed="true" disabled="disabled">2月</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn  btn-success" value="1" param_depressed="true" disabled="disabled">1月</button>
+            </div>
+        </div>
+
+    </div>
+    <div id="showDetail">
+
+    </div>
+    <div class="attendanceChart" title="打卡时间走势"></div>
+</div>
+<script>
+    var showDetail =  #{jsRoute @Application.showDetail()/};//详情页面
+    var url = #{jsRoute @Application.showName()/};//自动完成数据来源
+    var drawChartUrl = #{jsRoute @Application.drawChart() /}//绘图数据来源
+    $(document).ready(function(){
+        asynLoad();
+    })
+
+    //选择月份
+    $("div .btn-toolbar  button").click(function () {
+        $(this).toggleClass("btn-success");
+        var isDepressed = $(this).attr('param_depressed');
+        if(isDepressed == "true"){
+            $(this).attr('param_depressed', "false");
+        } else{
+            $(this).attr('param_depressed', "true");
+        }
+        asynLoad();
+    });
+
+
+    $("#submit_data").click(function(){
+        asynLoad();
+    })
+
+
+    //排序
+    function doSort(flag){
+        asynLoad(flag);
+    }
+
+    //异步加载具体信息
+    function asynLoad(flag){
+        var months=[];
+        var name =  $("#tags").val();
+        $("div .btn-toolbar button").each(function(){
+            if($(this).attr("param_depressed")=="false") {
+                months.push($(this).val());
+            }
+        });
+
+        $.ajax({
+            url:showDetail.url(),
+            data:{months:months, name:name,flag:flag},
+            type:"GET",
+            dataType:"HTML",
+            success:function (html) {
+                $("#showDetail").html(html);
+            }
+        });
+    }
+
+    //input框自动完成
     $(function () {
         var cache = {};   //结果集缓存
         var inputValues;    //用户输入缓存
@@ -64,7 +186,7 @@
             },
             select:function (event, ui) {
                 $("#tags").val(ui.item.value);
-                $("#search").submit();
+                asynLoad();
             },
             open:function () {
                 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
@@ -73,119 +195,37 @@
                 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
             }
         });
-
-        var name = $("#tags").val();
+         //highchart绘图
         $("#drawChart").click(function () {
+            var months=[];
+            var name =  $("#tags").val();
+            $("div .btn-toolbar button").each(function(){
+                if($(this).attr("param_depressed")=="false") {
+                    months.push($(this).val());
+                }
+            });
 
-            $.get(drawChart.url(),
-                    {"name":name},
-                    function (data) {
-                        $(".attendanceChart").html(data);
-                        $(".attendanceChart").dialog("open");
+            $.ajax({
+                url:drawChartUrl.url(),
+                data:{months:months, name:name},
+                type:"GET",
+                dataType:"HTML",
+                success:function (html) {
+                    $(".attendanceChart").html(html);
+                    $(".attendanceChart").dialog("open");
+                }
             });
         });
 
         $(".attendanceChart").dialog({
             autoOpen:false,
-            modal:true,
+            modal:false,
             resizable:false,
             width:830,
             height:470
         })
     });
 
-</script>
-<body>
-
-<div id="page-container">
-    <div id="header">
-        <form class="form-inline" role="form" action="@{Application.index()}" id="search">
-            <div class="col-lg-7" id="searchText">
-                <div class="input-group">
-                    <input type="hidden" id="flag" name="flag" value="">
-                    <input type="text" id="tags" class="form-control" name="name" value="${name}" placeholder="请输入姓名/拼音/首字母">
-                      <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">Go!</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <button type="button" class="btn btn-info" id="drawChart">Info</button>
-                      </span>
-                </div>
-            </div>
-
-        </form>
-    </div>
-    <div style="font-size: 14px">
-        <br>
-        <br>
-        打卡异常次数: ${eventDto.exceptionTimes}次
-        <br>
-        上班迟到累计时间: ${eventDto.defectiveTime}分钟(注：不包含缺省统计)
-        <br>
-        加班天数: ${eventDto.extraWorkDay}天
-    </div>
-    <div id="content">
-        <table class="table table-bordered" style="text-align: center">
-            <thead>
-            <tr>
-                <th style="text-align: center">姓名</th>
-                <th style="text-align: center" onclick="doSort('2')"><a title="点击排序" style="cursor: pointer">部门</a></th>
-                <th style="text-align: center" onclick="doSort('1')"><a title="点击排序" style="cursor: pointer">日期</a></th>
-                <th style="text-align: center">上班打卡时间</th>
-                <th style="text-align: center">下班打卡时间</th>
-                <th style="text-align: center" onclick="doSort('3')"><a title="点击排序" style="cursor: pointer">状态</a></th>
-                *{<th style="text-align: center" >迟到次数</th>
-                <th style="text-align: center" >迟到总时间(minutes)</th>}*
-            </tr>
-            </thead>
-            <tbody>
-            #{list items:list ,as :'item'}
-                #{if item.status != 0 && item.status != -1 && item.status !=-3}
-                <tr class="danger">
-                    <td>${item.name}</td>
-                    <td>${item.department}</td>
-                    <td>${item.punchedDate}(${item.weeks})</td>
-                    <td>${item.showStatus(item).startTime}</td>
-                    <td>${item.showStatus(item).endTime}</td>
-                    <td>${item.showStatus(item).result}</td>
-                   *{ <td>${lateNum}</td>
-                    <td>${lateMinutes}</td>}*
-                </tr>
-                #{/if}
-                #{elseif item.status ==-1 || item.status == -3}
-                <tr class="active">
-                    <td>${item.name}</td>
-                    <td>${item.department}</td>
-                    <td>${item.punchedDate}(${item.weeks})</td>
-                    <td>${item.showStatus(item).startTime}</td>
-                    <td>${item.showStatus(item).endTime}</td>
-                    <td>${item.showStatus(item).result}</td>
-                    *{<td>${lateNum}</td>
-                    <td>${lateMinutes}</td>}*
-                </tr>
-                #{/elseif}
-                #{else }
-                <tr class="success">
-                    <td>${item.name}</td>
-                    <td>${item.department}</td>
-                    <td>${item.punchedDate}(${item.weeks})</td>
-                    <td>${item.showStatus(item).startTime}</td>
-                    <td>${item.showStatus(item).endTime}</td>
-                    <td>${item.showStatus(item).result}</td>
-                    *{<td>${lateNum}</td>
-                    <td>${lateMinutes}</td>}*
-                </tr>
-                #{/else}
-            #{/list}
-            </tbody>
-
-        </table>
-    </div>
-    <div class="attendanceChart" title="打卡时间走势图"></div>
-</div>
-<script>
-    function doSort(num) {
-        $("#flag").val(num);
-        $("#search").submit();
-    }
 
 </script>
 </body>

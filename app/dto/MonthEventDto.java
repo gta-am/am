@@ -4,13 +4,13 @@ package dto;
  * User: liuhongjiang
  * Date: 13-12-2
  * Time: 上午10:43
- * 功能说明:
+ * 功能说明: 以月为单位统计各种事件次数
  */
 public class MonthEventDto {
     /*
         当前月份
      */
-    public String thisMonth;
+    public int thisMonth;
     /*
      本月打卡异常次数
     */

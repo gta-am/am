@@ -1,0 +1,130 @@
+#{if name!=null && !name.trim().equals("")}
+<div style="margin-top: 10px">
+    <table class="table table-bordered table-hover" style="text-align: center">
+        <thead>
+        <tr>
+            <th style="text-align: center">月份</th>
+            <th style="text-align: center">打卡异常次数</th>
+            <th style="text-align: center">上班迟到累计时间</th>
+            <th style="text-align: center">加班天数</th>
+        </tr>
+        </thead>
+        <tbody>
+        #{list items:eventList, as:'item' }
+        <tr class="warning">
+            <td>${item.thisMonth}月</td>
+            <td>${item.exceptionTimes}次</td>
+            <td>${item.defectiveTime}分钟</td>
+            <td>${item.extraWorkDay}天</td>
+        </tr>
+        #{/list}
+        <tr class="warning">
+            <td>总计</td>
+            <td>${totalExceptionTimes}次</td>
+            <td>${totalDefectiveTime}分钟</td>
+            <td>${totalextraWorkDay}天</td>
+        </tr>
+        #{if level ==1}
+        <tr class="text-left">
+           <td colspan="4" style="height: 50px"> <span style="font-size: 30px;color: #9b16ff;padding-left: 100px"> perfect!</span><span style="font-size: 20px;color: #9b16ff;padding-left: 50px"> 您一定是个非常守时的人！</span>  </td>
+        </tr>
+        #{/if}
+        #{elseif level ==2}
+        <tr class="text-left">
+            <td colspan="4" style="height: 50px"> <span style="font-size: 30px;color: #ee62ff;padding-left: 100px"> great!</span><span style="font-size: 20px;color: #ee62ff;padding-left: 50px"> 和您约会不必久等！</span>  </td>
+        </tr>
+        #{/elseif}
+        #{elseif level ==3}
+        <tr class="text-left">
+            <td colspan="4" style="height: 50px"> <span style="font-size: 30px;color: #468847;padding-left: 100px"> good!</span><span style="font-size: 20px;color:#468847;padding-left: 50px"> 好样的, keep going!</span>  </td>
+        </tr>
+        #{/elseif}
+        #{elseif level ==5}
+        <tr class="text-left">
+            <td colspan="4" style="height: 50px"> <span style="font-size: 30px;color: #B94A48;padding-left: 100px"> oh myGod!</span><span style="font-size: 20px;color: #B94A48;padding-left: 50px"> 下个月就睡公司吧！</span>  </td>
+        </tr>
+        #{/elseif}
+        #{else }
+        <tr class="text-left">
+            <td colspan="4" style="height: 50px"> <span style="font-size: 30px;color: #C09853;padding-left: 100px"> so-so!</span><span style="font-size: 20px;color:#C09853;padding-left: 50px"> 您还可以做得更好,加油！</span>  </td>
+        </tr>
+        #{/else}
+        </tbody>
+    </table>
+</div>
+<a id="showExplain" style="cursor: pointer" param_value="false">点击查看使用说明</a>
+
+<div id="explain" style="font-family:Arial, Helvetica, Verdana, Sans-serif;line-height: 30px;color: #d718ff;display:none" class="text-left">
+    1. 目前只适用于正常上下班的GTA同事（上午:08:45,下午:18:00）。<br/>
+    2. 系统数据来源是人事同事整理的excel。所以，目前大家的请假/调休/出差记录不能有效统计到,抱歉!  <br/>
+    3. 由于没有做浏览器兼容，如果想使用该系统所有功能，请选择Firefox或者chrome！<br/>
+    4. 现在收录了7-11月份的有效打卡记录可供大家查询。<br/>
+    5. 任何BUG和改进意见可以RTX或者邮件我（<span style="color: red;">liuhj1@gtadata.com</span>）。 <br/>
+    （这个打卡记录查询小系统（我们叫它AM），是机构应用Web组所有组员闲暇时间弄的，<br/>
+    &nbsp; &nbsp;目的是方便大家查询打卡记录，填写绩效考核表,希望大家喜欢.用到的主要技术有:<br/>
+    &nbsp; &nbsp;java,elaticsearch,playframework,jquery,highcharts,bootstrap.）
+</div>
+<div id="content">
+
+    <table class="table table-bordered table-hover" style="text-align: center">
+        <thead>
+        <tr id="softdata">
+            <th style="text-align: center">姓名</th>
+            <th style="text-align: center" onclick="doSort('2')"><a title="点击排序" style="cursor: pointer"  value="2">部门</a></th>
+            <th style="text-align: center" onclick="doSort('1')"><a title="点击排序" style="cursor: pointer"  value="1">日期</a></th>
+            <th style="text-align: center">上班打卡时间</th>
+            <th style="text-align: center">下班打卡时间</th>
+            <th style="text-align: center" onclick="doSort('3')"><a title="点击排序" style="cursor: pointer"  value="2">状态</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        #{list items:biggerList ,as :'item'}
+            #{if item.status != 0 && item.status != -1 && item.status !=-3}
+            <tr class="danger">
+                <td>${item.name}</td>
+                <td>${item.department}</td>
+                <td>${item.punchedDate}(${item.weeks})</td>
+                <td>${item.showStatus(item).startTime}</td>
+                <td>${item.showStatus(item).endTime}</td>
+                <td>${item.showStatus(item).result}</td>
+            </tr>
+            #{/if}
+            #{elseif item.status ==-1 || item.status == -3}
+            <tr class="active">
+                <td>${item.name}</td>
+                <td>${item.department}</td>
+                <td>${item.punchedDate}(${item.weeks})</td>
+                <td>${item.showStatus(item).startTime}</td>
+                <td>${item.showStatus(item).endTime}</td>
+                <td>${item.showStatus(item).result}</td>
+            </tr>
+            #{/elseif}
+            #{else }
+            <tr class="success">
+                <td>${item.name}</td>
+                <td>${item.department}</td>
+                <td>${item.punchedDate}(${item.weeks})</td>
+                <td>${item.showStatus(item).startTime}</td>
+                <td>${item.showStatus(item).endTime}</td>
+                <td>${item.showStatus(item).result}</td>
+            </tr>
+            #{/else}
+        #{/list}
+        </tbody>
+
+    </table>
+
+</div>
+#{/if}
+<script>
+    $("#showExplain").click(function(){
+        var flag = $(this).attr("param_value");
+        if(flag == "false"){
+            $("#explain").css('display','block');
+            $(this).attr('param_value','true');
+        } else{
+            $("#explain").css('display','none');
+            $(this).attr('param_value','false');
+        }
+    })
+</script>

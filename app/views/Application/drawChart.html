@@ -4,6 +4,13 @@
 <script type="text/javascript">
     var data=${data};
     var data2=${data2};
+    var _start=${_start};
+    var _end=${_end};
+
+    var interval = parseInt((_end-_start)/6);
+    if(interval<=24*3600*1000){
+        interval = 24*3600*1000;
+    }
 </script>
 <div id="container" style="width: 745px;height: 220px"></div>
 <div id="container2" style="width: 745px;height: 220px"></div>

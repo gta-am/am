@@ -93,11 +93,12 @@ public abstract class CommonUtils {
      * @param list
      * @return
      */
-    public static void getStatus(List<UserInfoDto> list,MonthEventDto eventDto){
+    public static MonthEventDto getStatus(List<UserInfoDto> list){
         final String[]  HOLIDAY = {"2013-10-1","2013-10-2","2013-10-3","2013-10-4","2013-10-5","2013-10-6","2013-10-7"};
+        MonthEventDto eventDto = new MonthEventDto();
         for (UserInfoDto u : list) {
             if (u == null) {
-                return;
+                return null;
             }
             long punchTime;          //打卡时间
             int status = -2;            //状态
@@ -107,7 +108,7 @@ public abstract class CommonUtils {
             calendar.setTime(parseDate(u.punchedDate));
             int x = calendar.get(Calendar.DAY_OF_WEEK) - 1;
             getWeeks(u,x);
-            getMonth(u.punchedDate,eventDto);
+            eventDto.thisMonth = calendar.get(Calendar.MONTH)+1;
             if (x == 6 || x == 0) {   //周末
                 if(!"2013-10-12".equals(u.punchedDate)){
                     u.status = -1;
@@ -167,12 +168,12 @@ public abstract class CommonUtils {
                     continue;
                 }
             }
-            if(u.status!=-1 && u.status!=0){   //统计累计打卡异常次数
+            if(u.status!=-1 && u.status!=0 && u.status!=-3){   //统计累计打卡异常次数
                 eventDto.exceptionTimes++;
             }
         }
 
-
+        return eventDto;
 
     }
 
@@ -210,39 +211,5 @@ public abstract class CommonUtils {
          }
 
      }
-
-    /**
-     * 当月是几月
-     * @param month
-     * @param eventDto
-     */
-    private static void getMonth(String month,MonthEventDto eventDto){
-        if(month.contains("-01-")){
-            eventDto.thisMonth = "一月";
-        }else if(month.contains("-02-")){
-            eventDto.thisMonth = "二月";
-        }else if(month.contains("-03-")){
-            eventDto.thisMonth = "三月";
-        }else if(month.contains("-04-")){
-            eventDto.thisMonth = "四月";
-        }else if(month.contains("-05-")){
-            eventDto.thisMonth = "五月";
-        }else if(month.contains("-06-")){
-            eventDto.thisMonth = "六月";
-        }else if(month.contains("-07-")){
-            eventDto.thisMonth = "七月";
-        }else if(month.contains("-08-")){
-            eventDto.thisMonth = "八月";
-        }else if(month.contains("-09-")){
-            eventDto.thisMonth = "九月";
-        }else if(month.contains("-10-")){
-            eventDto.thisMonth = "十月";
-        }else if(month.contains("-11-")){
-            eventDto.thisMonth = "十一月";
-        }else {
-            eventDto.thisMonth = "十二月";
-        }
-
-    }
 
 }

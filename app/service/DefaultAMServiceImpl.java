@@ -17,9 +17,11 @@ import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import play.Logger;
 import play.libs.F;
+import utils.CommonUtils;
 import utils.ElasticsearchHelper;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
@@ -148,7 +150,7 @@ public class DefaultAMServiceImpl implements AMService {
                 .field("index", "not_analyzed")
                 .endObject()
                 .startObject(InfomationFieldMapping.PUNCHEDDATE)    //打卡日期
-                .field("type", "string")
+                .field("type", "date")
                 .field("store", "yes")
                 .field("index", "not_analyzed")
                 .endObject()
@@ -238,6 +240,23 @@ public class DefaultAMServiceImpl implements AMService {
 //        newsFileFilterBuilder.add(FilterBuilders.queryFilter(queryBuilder));
         newsFileFilterBuilder.add(FilterBuilders.prefixFilter(InfomationFieldMapping.PRIMITIVENAME, name));
         SearchResponse searchResponse = ElasticsearchHelper.doSearchByFilterWithSort(index_name, newsFileFilterBuilder, sortBuilder, index_type_news_info);
+        List<UserInfoDto> list = ElasticsearchHelper.parseHits2List(searchResponse.hits(), UserInfoDto.class);
+        return list;
+    }
+
+    /**
+     * 根据姓名，月份 得到response
+     * @param name
+     * @return
+     */
+    @Override
+    public List<UserInfoDto> searchInfoByNameAndMonth(String name,int month) {
+        Date startDate = CommonUtils.parseDate("2013-"+month+"-01");
+        Date endDate = CommonUtils.parseDate("2013-"+month+"-31");
+        AndFilterBuilder newsFileFilterBuilder = FilterBuilders.andFilter().cache(false);
+        newsFileFilterBuilder.add(FilterBuilders.rangeFilter(InfomationFieldMapping.PUNCHEDDATE).from(startDate).to(endDate));
+        newsFileFilterBuilder.add(FilterBuilders.prefixFilter(InfomationFieldMapping.PRIMITIVENAME, name));
+        SearchResponse searchResponse = ElasticsearchHelper.doSearchByFilterWithoutSort(index_name, newsFileFilterBuilder, index_type_news_info);
         List<UserInfoDto> list = ElasticsearchHelper.parseHits2List(searchResponse.hits(), UserInfoDto.class);
         return list;
     }

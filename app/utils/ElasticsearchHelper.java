@@ -134,8 +134,19 @@ public class ElasticsearchHelper {
         SearchResponse searchResponse = client.prepareSearch(index)
                 .setFilter(filterBuilder)
                 .setTypes(types)
-                .setSize(100)
+                .setSize(500)
                 .addSort(sortBuilder)
+                .setExplain(true)
+                .execute()
+                .actionGet();
+        return searchResponse;
+    }
+
+    public static SearchResponse doSearchByFilterWithoutSort(String index, FilterBuilder filterBuilder, String... types) {
+        SearchResponse searchResponse = client.prepareSearch(index)
+                .setFilter(filterBuilder)
+                .setTypes(types)
+                .setSize(500)
                 .setExplain(true)
                 .execute()
                 .actionGet();

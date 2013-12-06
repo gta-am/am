@@ -27,6 +27,8 @@ public interface AMService {
 
     public List<UserInfoDto> searchInfoByName(String name);
 
+    public List<UserInfoDto> searchInfoByNameAndMonth(String name,int month);
+
     public List<UserInfoDto> searchInfoByPinyin(String pinyin);
 
     public List<UserInfoDto> searchInfoByQP(String qp);
